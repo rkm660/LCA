@@ -1,0 +1,69 @@
+<!-- Login Section -->
+        <section  ng-show="!loggedIn" class="ptb ptb-sm-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="border-box">
+                            <h4>Already registered?</h4>
+                            <form>
+                                <div class="form-field-wrapper">
+                                    <label for="login-email">Email address</label>
+                                    <input ng-model="loginEmail" type="email" required="" placeholder="Enter your email" name="login-email" id="login-email" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="login-pass">Password</label>
+                                    <input ng-model="loginPassword" type="password" required="" placeholder="Enter your Password" name="login-pass" id="login-pass" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <button ng-click="login()" name="submit" id="form-submit" type="submit" class="btn btn-md btn-black">Sign In</button>
+                                <a ng-click="forgotPassword()" class="float-right">Forgot password?</a>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border-box">
+                            <h4>Create an account</h4>
+                            <p>Please enter your email address to create an account.</p>
+                            <form>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-first-name"></label>
+                                    <input ng-model="signupFirstName" type="text" required="" placeholder="Enter your first name" name="signup-first-name" id="signup-first-name" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-last-name"></label>
+                                    <input ng-model="signupLastName" type="text" required="" placeholder="Enter your last name" name="signup-last-name" id="signup-last-name" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-email"></label>
+                                    <input ng-model="signupEmail"  type="email" required="" placeholder="Enter your email address" name="signup-email" id="signup-email" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-password"></label>
+                                    <input ng-model="signupPassword"  type="password" required="" placeholder="Enter your password" name="signup-password" id="signup-password" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-email"></label>
+                                    <input ng-model="signupPasswordConfirm"  type="password" required="" placeholder="Enter your password again to confirm" name="signup-password-confirm" id="signup-password-confirm" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-ai"></label>
+                                    <input ng-model="signupAI"  type="number" required="" placeholder="Enter your AI number" name="signup-ai" id="signup-ai" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-position"></label>
+                                    <input ng-model="signupPosition"  type="text" required="" placeholder="Enter your position" name="signup-position" id="signup-position" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <div class="form-field-wrapper">
+                                    <label for="signup-phone"></label>
+                                    <input ng-model="signupPhone"  type="phone" required="" placeholder="Enter your phone number" name="signup-phone" id="signup-phone" class="input-sm form-full" aria-required="true">
+                                </div>
+                                <button ng-click="signup()" class="btn btn-md btn-black">Sign Up</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Login Section -->
+        <div ng-show="loggedIn">Welcome {{currentUser.firstName}}
+        	<button ng-click="logout()">logout</button>
+        </div>
