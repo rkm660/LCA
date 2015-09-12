@@ -2,7 +2,7 @@
  * Main Application
  */
 var app = angular.module('portalApp', [
-  'ngRoute', 'firebase'
+  'ngRoute', 'firebase', 'ngTouch'
 ]);
 
 /**
@@ -11,8 +11,9 @@ var app = angular.module('portalApp', [
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     // Home
-    .when("/", {templateUrl: "portal/partials/loginRegister.html", controller: "LoginRegisterController"})
-    
+    .when("/", {templateUrl: "portal/partials/home.html", controller: "HomeController"})
+    .when("/announcements", {templateUrl: "portal/partials/announcements.html",controller: "AnnouncementsController"})
+    .when("/jobSwapper", {templateUrl: "portal/partials/swapper.html",controller: "SwapperController"})
     .otherwise("/404", {templateUrl: "portal/partials/404.html", controller: "404Controller"});
 }]);
 

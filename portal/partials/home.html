@@ -1,0 +1,133 @@
+<!-- Login Section -->
+<section ng-show="!loggedIn" class="pt-15 ptb-sm-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="border-box">
+                    <h4>Already registered?</h4>
+                    <form>
+                        <div class="form-field-wrapper">
+                            <label for="login-email">Email address</label>
+                            <input ng-model="loginEmail" type="email" required="" placeholder="Enter your email" name="login-email" id="login-email" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="login-pass">Password</label>
+                            <input ng-model="loginPassword" type="password" required="" placeholder="Enter your Password" name="login-pass" id="login-pass" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <button ng-click="login(loginEmail, loginPassword)" name="submit" id="form-submit" type="submit" class="btn btn-md btn-black">Sign In</button>
+                        <a ng-click="forgotPassword()" class="float-right">Forgot password?</a>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="border-box">
+                    <h4>Create an account</h4>
+                    <p>Please enter your email address to create an account.</p>
+                    <form>
+                        <div class="form-field-wrapper">
+                            <label for="signup-first-name"></label>
+                            <input ng-model="signupFirstName" type="text" required="" placeholder="Enter your first name" name="signup-first-name" id="signup-first-name" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="signup-last-name"></label>
+                            <input ng-model="signupLastName" type="text" required="" placeholder="Enter your last name" name="signup-last-name" id="signup-last-name" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="signup-email"></label>
+                            <input ng-model="signupEmail" type="email" required="" placeholder="Enter your email address" name="signup-email" id="signup-email" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="signup-password"></label>
+                            <input ng-model="signupPassword" type="password" required="" placeholder="Enter your password" name="signup-password" id="signup-password" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="signup-email"></label>
+                            <input ng-model="signupPasswordConfirm" type="password" required="" placeholder="Enter your password again to confirm" name="signup-password-confirm" id="signup-password-confirm" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="signup-ai"></label>
+                            <input ng-model="signupAI" type="number" required="" value="0" placeholder="Enter your AI number (0 if not initiated)" name="signup-ai" id="signup-ai" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="signup-position"></label>
+                            <select ng-model="signupPosition" class="form-control" required="" name="signup-position" id="signup-position" class="input-sm form-full" aria-required="true">
+                                <option value="" disabled selected>Select your position</option>
+                                <option>None</option>
+                                <option>High Alpha</option>
+                                <option>High Beta</option>
+                                <option>High Theta</option>
+                                <option>High Gamma</option>
+                                <option>High Tau</option>
+                                <option>High Iota</option>
+                                <option>High Rho</option>
+                                <option>High Kappa</option>
+                                <option>High Delta</option>
+                                <option>High Phi</option>
+                                <option>High Sigma</option>
+                                <option>High Epsilson</option>
+                                <option>High Upsilson</option>
+                                <option>High Pi</option>
+                                <option>Exec Board</option>
+                                <option>Kitchen Manager</option>
+                                <option>House Manager</option>
+				                <option>IM Chair</option>
+                                <option>Fire Marshall</option>
+                            </select>
+                        </div>
+                        <div class="form-field-wrapper">
+                            <label for="signup-phone"></label>
+                            <input ng-model="signupPhone" type="phone" required="" placeholder="Enter your phone number" name="signup-phone" id="signup-phone" class="input-sm form-full" aria-required="true">
+                        </div>
+                        <button ng-click="signup()" class="btn btn-md btn-black">Sign Up</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Login Section -->
+<div class="container" ng-show="loggedIn">
+    <div ng-include="'portal/templates/appsMenu.html'"></div>
+    <div class="row text-center">
+        <h3>Welcome, {{currentUser.firstName}}! </h3>
+        <p>Make sure that the information below is correct -- if it isn't, notify Rahul</p>
+        <!--<div class="form-field-wrapper">
+            <label for="update-position"></label>
+            <select ng-model="updatePosition" required="" name="update-position" id="update-position"  aria-required="true">
+                <option value="" disabled selected>Update your position</option>
+                <option>None</option>
+                <option>High Alpha</option>
+                <option>High Beta</option>
+                <option>High Theta</option>
+                <option>High Gamma</option>
+                <option>High Tau</option>
+                <option>High Iota</option>
+                <option>High Rho</option>
+                <option>High Kappa</option>
+                <option>High Delta</option>
+                <option>High Phi</option>
+                <option>High Sigma</option>
+                <option>High Epsilson</option>
+                <option>High Pi</option>
+                <option>Exec Board</option>
+                <option>Kitchen Manager</option>
+                <option>House Manager</option>
+                <option>IM Chair</option>
+                <option>Fire Marshall</option>
+            </select>
+	        <button class="btn btn-lg btn-black" ng-click="setPosition(updatePosition)">Update</button>
+        </div>-->
+        <button class="btn btn-lg btn-black" ng-click="logout()">Logout</button>
+    </div>
+    <br>
+    <div class="row text-center">
+    <h3>First Name</h3><h4> {{currentUser.firstName}}</h4>
+    <h3>Last Name </h3><h4>{{currentUser.lastName}}</h4>
+    <h3>Position </h3><h4>{{currentUser.position}}</h4>
+    <h3>AI Number </h3><h4>{{currentUser.AI}} </h4>
+    <h3>Email Address </h3><h4>{{currentUser.email}}</h4>
+    <h3>Phone Number</h3><h4>{{currentUser.phone}}</h4>
+
+    </div>
+  </div>
+</div>

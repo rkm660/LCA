@@ -1,0 +1,44 @@
+<div ng-include="'portal/templates/appsMenu.html'"></div>
+<div class="container" ng-show="loggedIn">
+    <form>
+        <div class="form-field-wrapper">
+            <label for="myJobs"></label>
+            <div class="form-field-wrapper">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <h4>Add to Job Board</h4>
+                        <span><h6>What?</h6>
+                        <div class="form-field-wrapper">
+                            <input ng-model="newJob" type="text" required="" placeholder="e.g. kitchen, house, clean up, set up" name="whatJob" id="whatJob" class="input-sm form-full" aria-required="true">
+                        </div>
+                        </span>
+                        <span>
+                            <h6>When?</h6>
+                            <div class="form-field-wrapper">
+                            <input ng-model="newWhen" type="text" required="" placeholder="Time of Job" name="whenJob" id="whenJob" class="input-sm form-full" aria-required="true">
+                        </div>
+                        </span>
+                        <span>
+                           <div class="form-field-wrapper">
+                            <h6>Willing to pay?</h6>
+                            <input ng-model="newHowMuch" type="text" placeholder="Amount offered (optional)" name="howMuchJob" id="howMuchJob" class="input-sm form-full" >
+                            </div>
+                        </span>
+                        <button ng-click="postJob(newJob, newWhen, newHowMuch)" class="btn btn-md btn-black">Add Job</a>
+                    </div>
+                    <div class="col-md-6">
+                		<h3>Job Board</h3>
+                		<h6>(swipe left to delete)</h6>
+						<ul class="list-group">
+							<li ng-swipe-left="removeJob(job)" style="word-wrap: break-word" ng-repeat="job in jobs" class="list-group-item"><strong>{{job.what}}</strong> | {{job.when}} <span ng-show="{{job.howMuch.length > 0}}">{{job.howMuch}}</span> - <small>{{job.firstName}} {{job.lastName}}</small></li>
+						</ul>
+                    </div>
+                </div>
+                <!-- 
+                <select ng-model="jobToTrade" required="" name="job-to-trade" id="job-to-trade" aria-required="true">
+                <option value="" disabled selected>Select from my jobs</option>
+                <option ng-repeat="job in myJobs">{{job.body}}</option>
+                </select> -->
+            </div>
+        </div>
+</div>
