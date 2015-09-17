@@ -14,7 +14,7 @@
 					<div class="form-field-wrapper">
 						<textarea ng-model="announcementBody" class="form-full" id="form-announcement" rows="7" name="form-message" placeholder="Your Announcement" required></textarea>
 					</div>
-
+					<input id="fileUpload" type="file" onchange="angular.element(this).scope().filesChanged(this)" multiple/>
 					<button ng-disabled="submitPostButtonDisabled" ng-click="postAnnouncement(announcementSubject, announcementBody)" class="btn btn-md btn-black form-full" type="submit" name="submit">Post Announcement</button>
 				</form>
         	</div>
@@ -30,7 +30,8 @@
                         <div class="post-entry">
 							<p>{{announcement.body}}</p>
                         </div>
-                        <!--<div class="post-more-link pull-right"><a href="">Download<i class="fa fa-long-arrow-right right"></i></a></div>-->
+                        <ul>
+                        <div ng-repeat="fileName in announcement.realFileNames" class="post-more-link pull-right"><a href="portal/files/announcements/{{fileName}}">{{announcement.originalFileNames[$index]}}<i class="fa fa-long-arrow-right right"></i></a></div>
                     </div>
                     <hr />
                     <!-- Pagination Nav

@@ -13,25 +13,35 @@
                         </div>
                         </span>
                         <span>
-                            <h6>When?</h6>
+                            <h6>Due Date?</h6>
                             <div class="form-field-wrapper">
-                            <input ng-model="newWhen" type="text" required="" placeholder="Time of Job" name="whenJob" id="whenJob" class="input-sm form-full" aria-required="true">
+                            <div class="form-group" ng-class="{'has-error': datepickerForm.date2.$invalid}">
+                            <input id="newDateJob" ng-model="newDateJob" class="input-sm form-full" aria-required="true" required="" type="date" class="form-control" data-date-format="yyyy-MM-dd" data-date-type="number" data-min-date="today" data-autoclose="1" name="date2" bs-datepicker>
+                            </div>
                         </div>
                         </span>
                         <span>
-                           <div class="form-field-wrapper">
-                            <h6>Willing to pay?</h6>
-                            <input ng-model="newHowMuch" type="text" placeholder="Amount offered (optional)" name="howMuchJob" id="howMuchJob" class="input-sm form-full" >
+                            <h6>Due at a time?</h6>
+                            <div class="form-field-wrapper">
+                            <select ng-model="newTimeJob" class="form-control" required="" class="input-sm form-full" aria-required="true">
+                            	<option ng-repeat="time in times">{{time}}</option>
+                            </select>
                             </div>
                         </span>
-                        <button ng-click="postJob(newJob, newWhen, newHowMuch)" class="btn btn-md btn-black">Add Job</a>
+                        <span>
+                           <div class="form-field-wrapper">
+                            <h6>Willing to offer?</h6>
+                            <input ng-model="newHowMuchJob" type="text" placeholder="A trade, $, etc." name="howMuchJob" id="howMuchJob" class="input-sm form-full" >
+                            </div>
+                        </span>
+                        <button ng-click="postJob(newJob, newDateJob, newTimeJob, newHowMuchJob)" class="btn btn-md btn-black">Add Job</a>
                     </div>
                     <div class="col-md-6">
-                		<h3>Job Board</h3>
-                		<h6>(swipe left to delete)</h6>
-						<ul class="list-group">
-							<li ng-swipe-left="removeJob(job)" style="word-wrap: break-word" ng-repeat="job in jobs" class="list-group-item"><strong>{{job.what}}</strong> | {{job.when}} <span ng-show="{{job.howMuch.length > 0}}">{{job.howMuch}}</span> - <small>{{job.firstName}} {{job.lastName}}</small></li>
-						</ul>
+                        <h3>Job Board</h3>
+                        <h6 ng-if="jobs.length > 0">(swipe left to delete, click to get in contact)</h6>
+                        <ul class="list-group">
+                            <li ng-click="notifyOwner(job)" ng-swipe-left="removeJob(job)" style="word-wrap: break-word" ng-repeat="job in jobs" class="list-group-item"><strong>{{job.what}}</strong> by {{formatDate(job.when)}} <span ng-show="{{job.howMuch.length > 0}}">| {{job.howMuch}}</span> - <small>{{job.firstName}} {{job.lastName}}</small></li>
+                        </ul>
                     </div>
                 </div>
                 <!-- 

@@ -1,0 +1,17 @@
+<div ng-include="'portal/templates/appsMenu.html'"></div>
+<div ng-show="loggedIn" class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Toilet Paper <span ng-if="currentUser.position == 'High Gamma'">Upload (PDF Only)</span></div>
+            <div style="height:1100px" class="panel-body">
+                <div ng-if="currentUser.position == 'High Gamma'">
+                	<input type="file" onchange="angular.element(this).scope().filesChanged(this)" multiple/>
+                	<button class="btn btn-default" ng-click="uploadFiles()">Upload</button>
+                </div>
+                <div class="myIframe">
+				<iframe id="pdf" src="portal/files/TP.pdf"></iframe>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

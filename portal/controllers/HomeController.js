@@ -34,7 +34,7 @@ app.controller('HomeController', function($scope, UserService, MenuService) {
     $scope.signup = function() {
         console.log($scope.signupFirstName, $scope.signupLastName, $scope.signupEmail, $scope.signupPassword, $scope.signupPasswordConfirm, $scope.signupAI,
             $scope.signupPhone, $scope.signupPosition);
-        if ($scope.signupFirstName && $scope.signupFirstName.length > 0 && $scope.signupLastName && $scope.signupLastName.length > 0 && $scope.signupEmail && $scope.signupEmail.length > 0 && $scope.signupPassword && $scope.signupPassword.length > 0 && $scope.signupPasswordConfirm && $scope.signupPasswordConfirm.length > 0 && $scope.signupAI && $scope.signupAI > 0 && $scope.signupPosition && $scope.signupPosition.length > 0 && $scope.signupPhone && $scope.signupPhone.length > 0) {
+        if ($scope.signupFirstName && $scope.signupFirstName.length > 0 && $scope.signupLastName && $scope.signupLastName.length > 0 && $scope.signupEmail && $scope.signupEmail.length > 0 && $scope.signupPassword && $scope.signupPassword.length > 0 && $scope.signupPasswordConfirm && $scope.signupPasswordConfirm.length > 0 && $scope.signupAI >= 0 && $scope.signupPosition && $scope.signupPosition.length > 0 && $scope.signupPhone && $scope.signupPhone.length > 0) {
             var ref = new Firebase("https://lca.firebaseio.com/");
             if ($scope.signupPassword == $scope.signupPasswordConfirm){
             ref.createUser({
@@ -42,7 +42,7 @@ app.controller('HomeController', function($scope, UserService, MenuService) {
                 password: $scope.signupPassword
             }, function(error, userData) {
                 if (error) {
-                    console.log("Error creating user:", error);
+                    alert(error);
                 } else {
                     console.log("Successfully created user account with uid:", userData.uid);
                     var usersRef = new Firebase("https://lca.firebaseio.com/users/" + userData.uid );
@@ -52,7 +52,8 @@ app.controller('HomeController', function($scope, UserService, MenuService) {
                     	email: $scope.signupEmail,
                     	AI: $scope.signupAI,
                     	position: $scope.signupPosition,
-                    	phone: $scope.signupPhone
+                    	phone: $scope.signupPhone,
+                    	uid: userData.uid
                     });
                     $scope.login($scope.signupEmail, $scope.signupPassword);
                     

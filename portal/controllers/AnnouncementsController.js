@@ -37,20 +37,50 @@ app.controller('AnnouncementsController', function($scope, $q, UserService, Menu
     $scope.postAnnouncement = function(sub, body) {
         if (sub && sub.length > 0 && body && body.length > 0) {
             $scope.submitPostButtonDisabled = true;
-            AnnouncementsService.postAnnouncement(sub, body, $scope.currentUser.uid, $scope.currentUser.firstName, $scope.currentUser.lastName, $scope.currentUser.position)
-                .then(function(res) {
-                    alert("Successfully posted!");
-                    $scope.announcementSubject = "";
-                    $scope.announcementBody = "";
-                    $scope.submitPostButtonDisabled = false;
+            
+            var originalFileNames = [];
+			angular.forEach($scope.files, function(file){
+				originalFileNames.push(file.name);
+			});
+			
+            AnnouncementsService.postAnnouncement(sub, body, $scope.currentUser.uid, $scope.currentUser.firstName, $scope.currentUser.lastName, $scope.currentUser.position, originalFileNames)
+                .then(function(announcement) {
+                        var announcementKey = announcement.key();
+                        var realFileNamesRef = new Firebase("https://lca.firebaseio.com/announcements/" + announcementKey);
+                        var realFileNames = [];
+                        angular.forEach(originalFileNames, function(fileName, index){
+                        	realFileNames.push(announcementKey + index + "." + AnnouncementsService.getExtension(fileName));
+                        });
+                        realFileNamesRef.child("realFileNames").set(
+                        	realFileNames
+                        );
+                        AnnouncementsService.uploadFiles($scope.files, announcementKey).success(function(response) {
+							angular.forEach(response, function(fileName, index){
+								console.log(fileName, index);
+								if (fileName == "false"){
+									alert("There was an error uploading your file.");
+								}
+							});
+							
+							alert("Successfully posted announcement!");
+							$scope.announcementSubject = "";
+							$scope.announcementBody = "";
+							document.getElementById("fileUpload").value = "";
+							$scope.submitPostButtonDisabled = false;
+                    });
                 })
-                .catch(function(err) {
-                    alert("There has been an error: ", err);
-                    $scope.submitPostButtonDisabled = false;
-                });
-        }
+        .catch(function(err) {
+            alert("There has been an error: ", err);
+            $scope.submitPostButtonDisabled = false;
+        });
+    }
 
-    };
+};
 
-    init();
+$scope.filesChanged = function(elm) {
+    $scope.files = elm.files;
+    $scope.$apply();
+};
+
+init();
 });

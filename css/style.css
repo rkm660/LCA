@@ -1869,6 +1869,25 @@ header.sticky .navigation a.current-ele {
             padding: 6px;
         }
 
+.myIframe {
+position: relative;
+padding-bottom: 65.25%;
+padding-top: 30px;
+height: 0;
+overflow: auto; 
+-webkit-overflow-scrolling:touch; //<<--- THIS IS THE KEY 
+border: solid black 1px;
+} 
+.myIframe iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+
+
+
 
 /*-------------------------------------------------------------------------------------------*/
 /*  Testimonials     ||---------------------------- */
@@ -3055,6 +3074,10 @@ ul.project-detail-block, .project-detail-block ul {
     display: inline-block;
     width: 100%;
 }
+	
+	.blog-post .post-header{
+		word-wrap: break-word;
+	}
 
     .blog-post .post-media {
         position: relative;
@@ -3083,10 +3106,13 @@ ul.project-detail-block, .project-detail-block ul {
 
     .blog-post .post-header h2 {
         margin-bottom: 30px;
+        
     }
 
     .blog-post .post-entry {
         margin-bottom: 30px;
+        word-wrap: break-word;
+
     }
 
         .blog-post .post-entry p, .blog-post .post-entry blockquote, .post-entry ul {

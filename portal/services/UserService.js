@@ -24,13 +24,13 @@ app.service("UserService", function($http, $q) {
                     });
                 };
         	
-        	var getUsers = function(){
+        	self.getUsers = function(){
         		return $http.get("https://lca.firebaseio.com/users.json");
         	}       
         	
         	self.userPositionHash = function(){
         		var deferred = $q.defer();
-        		getUsers().then(function(res){
+        		self.getUsers().then(function(res){
         			var hash = {};
         			angular.forEach(res.data, function(response){
         				hash[response.public.uid] = response.public.position;

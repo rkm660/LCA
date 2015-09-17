@@ -18,5 +18,5 @@ app.service("Utils",function(){
         var formattedDate = weekday[d.getDay()] + ' ' + monthname[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + " - " + strTime;
         return formattedDate;
     };
-	
+    
 });

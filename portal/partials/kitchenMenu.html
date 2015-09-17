@@ -1,0 +1,17 @@
+<div ng-include="'portal/templates/appsMenu.html'"></div>
+<div ng-show="loggedIn" class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">Kitchen Menu <span ng-if="currentUser.position == 'Kitchen Manager'">Upload (PDF Only)</span></div>
+            <div style="height:1100px" class="panel-body">
+                <div ng-if="currentUser.position == 'Kitchen Manager'">
+                	<input type="file" onchange="angular.element(this).scope().filesChanged(this)" multiple/>
+                	<button class="btn btn-default" ng-click="uploadFiles()">Upload</button>
+                </div>
+                <div class="myIframe">
+				<iframe id="pdf" src="portal/files/menu.pdf"></iframe>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div ng-include="'portal/templates/appsMenu.html'"></div>
+<div ng-show="loggedIn" class="container">
+  <h2>&lambda; &chi; &alpha; Directory</h2>
+  <div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>AI #</th>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Email Address</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users | orderBy:'firstName'"">
+        <td>{{user.AI}}</td>
+        <td>{{user.firstName}} {{user.lastName}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.position}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-app.service("SwapperService",function($firebaseArray){
+app.service("SwapperService",function($firebaseArray, $q){
 
 	var self = this;
 	var refURL = "https://lca.firebaseio.com/jobs";
@@ -9,12 +9,33 @@ app.service("SwapperService",function($firebaseArray){
 		return jobs;
 	};
 	
+	self.filterJobs = function(){
+		var deferred = $q.defer();
+		var today = Date.now();
+		self.getAllJobs().$loaded().then(function(res){
+			var removePromiseArray = [];
+			angular.forEach(res, function(job){
+				if (job.when < today){
+					removePromiseArray.push(self.removeJob(job, res));
+				}
+			});
+			$q.all(removePromiseArray).then(function(){
+				deferred.resolve(true);	
+			})
+			.catch(function(err){
+				console.log(err);
+				deferred.reject(false);
+			});
+		});
+		return deferred.promise;
+	};
+	
 	self.postJob = function(what,when,howMuch, user){
 		var jobs = self.getAllJobs();
 		return jobs.$add({
 			what: what,
     		when: when,
-    		howMuch: howMuch,
+    		howMuch: howMuch ? howMuch : "",
     		firstName: user.firstName,
     		lastName: user.lastName,
     		uid: user.uid
